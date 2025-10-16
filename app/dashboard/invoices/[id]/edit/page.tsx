@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Edit Invoice",
 };
 
+export async function generateStaticParams() {
+  // Return empty array to prevent static generation
+  // This page should be dynamically rendered
+  return [];
+}
+
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;

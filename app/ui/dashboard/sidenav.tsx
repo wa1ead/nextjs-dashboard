@@ -3,6 +3,7 @@ import NavLinks from "@/app/ui/dashboard/nav-links";
 import AcmeLogo from "@/app/ui/acme-logo";
 import { signOut } from "@/auth";
 import { PowerIcon } from "@heroicons/react/24/outline";
+import { Suspense } from "react";
 
 export default function SideNav() {
   return (
@@ -16,7 +17,9 @@ export default function SideNav() {
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        <NavLinks />
+        <Suspense fallback={<NavLinksSkeleton />}>
+          <NavLinks />
+        </Suspense>
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <form
           action={async () => {
@@ -31,5 +34,24 @@ export default function SideNav() {
         </form>
       </div>
     </div>
+  );
+}
+
+function NavLinksSkeleton() {
+  return (
+    <>
+      <div className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 animate-pulse">
+        <div className="w-6 h-6 bg-gray-200 rounded"></div>
+        <div className="hidden md:block w-16 h-4 bg-gray-200 rounded"></div>
+      </div>
+      <div className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 animate-pulse">
+        <div className="w-6 h-6 bg-gray-200 rounded"></div>
+        <div className="hidden md:block w-16 h-4 bg-gray-200 rounded"></div>
+      </div>
+      <div className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 animate-pulse">
+        <div className="w-6 h-6 bg-gray-200 rounded"></div>
+        <div className="hidden md:block w-16 h-4 bg-gray-200 rounded"></div>
+      </div>
+    </>
   );
 }
